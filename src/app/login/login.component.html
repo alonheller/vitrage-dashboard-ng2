@@ -1,5 +1,34 @@
-<p>
-  <input type="text" placeholder="User" #user>
-  <input type="password" placeholder="Password" #password>
-  <button (click)="onLogin(user.value, password.value)">Login</button>
-</p>
+<div>
+  <div>
+    <label>User: </label>
+    <input type="text" placeholder="User" #user value="admin">
+  </div>
+
+  <div>
+    <label>Password: </label>
+    <input type="text" placeholder="Password" #password value="h0r1z0n"><!-- type="password" -->
+  </div>
+
+<div>
+    <label>Tenant: </label>
+    <input type="text" placeholder="Tenant" #tenantName value="admin">
+</div>
+
+<div>
+    <label>ip: </label>
+    <input type="text" placeholder="ip" #ip value="10.5.132.100">
+</div>
+
+<div>
+    <label>port: </label>
+    <input type="text" placeholder="port" #port value="5000">
+</div>
+
+<div>
+    <label>Liberty: </label>
+    <input type="checkbox" placeholder="Liberty" #isLiberty>
+</div>
+
+  <button (click)="onLogin(user.value, password.value, tenantName.value, ip.value, port.value, isLiberty.checked)">Login</button>
+
+</div>
