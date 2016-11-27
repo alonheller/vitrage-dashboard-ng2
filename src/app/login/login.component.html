@@ -1,3 +1,5 @@
 <p>
-  login works!
+  <input type="text" placeholder="User" #user>
+  <input type="password" placeholder="Password" #password>
+  <button (click)="onLogin(user.value, password.value)">Login</button>
 </p>
