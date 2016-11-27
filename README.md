@@ -29,3 +29,12 @@ Run `ng github-pages:deploy` to deploy to Github Pages.
 ## Further help
 
 To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+## TODO:
+1. Connect to openstack
+2. Get vitrage API
+3. BDSM - https://github.com/500tech/bdsm
+4. Refactor to ngModules: OpenstackLoginModule, VitrageAPIModule
+5. Add Material Design, Angular Bootstrap-2
+6. Add chart library: http://js.cytoscape.org/
