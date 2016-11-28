@@ -24,6 +24,24 @@ export class LoginService {
     headers.append('Accept', 'application/json');
 
     this._http.post(url, body, {headers: headers})
+    .map((res:any) => {
+      
+        let result = JSON.parse(res._body);
+        let token = result.access.token.id;
+        let vitrageURL = '';
+
+        result.access.serviceCatalog.forEach(element => {
+          if (element.name === 'vitrage') {
+            vitrageURL = element.endpoints[0].publicURL;            
+          }
+        });
+        // ---- TODO: Remove
+        vitrageURL = 'http://135.248.19.82:8999';
+        // ---- TODO: Remove
+
+        return {token: token, vitrageURL: vitrageURL};
+      
+    })
     .subscribe(
       res => console.log('Success: ', res),
       err => this.logError(err));
