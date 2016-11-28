@@ -29,6 +29,12 @@
     <input type="checkbox" placeholder="Liberty" #isLiberty>
 </div>
 
+<div>
   <button (click)="onLogin(user.value, password.value, tenantName.value, ip.value, port.value, isLiberty.checked)">Login</button>
+</div>
+
+<div>
+  <button (click)="onGetTopology()">Get Topology</button>
+</div>
 
 </div>

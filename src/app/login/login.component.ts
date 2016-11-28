@@ -21,4 +21,8 @@ export class LoginComponent implements OnInit {
   onLogin(user:string, password:string, tenantName:string, ip:string, port:string, isLiberty:boolean) {        
     this._loginService.login(user, password, tenantName, ip, port, isLiberty);
   }
+
+  onGetTopology() {
+    this._loginService.getTopology();
+  }
 }

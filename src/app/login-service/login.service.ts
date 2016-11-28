@@ -10,6 +10,8 @@ import 'rxjs/add/operator/catch';
 export class LoginService {
 
   private _http:Http;
+  private _vitrageUrl:string;
+  private _token:string;
 
   constructor(private http: Http) {
     this._http = http;
@@ -27,21 +29,33 @@ export class LoginService {
     .map((res:any) => {
       
         let result = JSON.parse(res._body);
-        let token = result.access.token.id;
-        let vitrageURL = '';
+        this._token = result.access.token.id;        
 
         result.access.serviceCatalog.forEach(element => {
           if (element.name === 'vitrage') {
-            vitrageURL = element.endpoints[0].publicURL;            
+            this._vitrageUrl = element.endpoints[0].publicURL;            
           }
         });
         // ---- TODO: Remove
-        vitrageURL = 'http://135.248.19.82:8999';
+        this._vitrageUrl = 'http://135.248.19.82:8999';
         // ---- TODO: Remove
 
-        return {token: token, vitrageURL: vitrageURL};
+        return {token: this._token, vitrageUrl: this._vitrageUrl};
       
     })
+    .subscribe(
+      res => console.log('Success: ', res),
+      err => this.logError(err));
+  }
+
+  getTopology() {
+    let body = {"graph_type": "graph", "depth": null, "root": null, "all_tenants": 0, "query": null};
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('X-Auth-Token', this._token);
+
+    this._http.post(this._vitrageUrl + '/v1/topology', body, {headers: headers})
     .subscribe(
       res => console.log('Success: ', res),
       err => this.logError(err));

@@ -38,3 +38,12 @@ To get more help on the `angular-cli` use `ng --help` or go check out the [Angul
 4. Refactor to ngModules: OpenstackLoginModule, VitrageAPIModule
 5. Add Material Design, Angular Bootstrap-2
 6. Add chart library: http://js.cytoscape.org/
+
+## CORS
+Add this line:
+    [cors]
+    allowed_origin = *
+
+to both files: 
+    /etc/keystone/keystone.conf 
+    /etc/Vitrage/Vitrage.conf
