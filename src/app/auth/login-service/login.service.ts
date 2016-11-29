@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
 import { Router } from '@angular/router';
+import { Login } from './../../models/login';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -15,9 +16,9 @@ export class LoginService {
 
   constructor(private _http: Http, private _router:Router) { }
 
-  login(user:string, password:string, tenantName:string, ip:string, port: string, isLiberty:boolean) {
-    let url = `http://${ip}:${port}${!isLiberty ? '/identity' : ''}/v2.0/tokens`;
-    let body = {"auth":{"passwordCredentials": {"password":password,"username":user}, "tenantName": tenantName}};
+  login(login:Login) {
+    let url = `http://${login.openstackServerIp}:${login.port}${!login.isLiberty ? '/identity' : ''}/v2.0/tokens`;
+    let body = {"auth":{"passwordCredentials": {"password":login.password,"username":login.username}, "tenantName": login.tenant}};
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

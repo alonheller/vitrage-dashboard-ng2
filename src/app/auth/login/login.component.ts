@@ -1,25 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { LoginService } from '../login-service/login.service';
+import { Login } from './../../models/login';
 
 @Component({
   selector: 'auth-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  private _loginService:LoginService;
+  private _loginService: LoginService;
+  private _model: Login;
+  private _loading: boolean = false;
 
   constructor(loginService: LoginService) {
     this._loginService = loginService;
+    this.initModel();
   }
 
-  ngOnInit() {
+  login() {
+    this._loginService.login(this._model);
   }
 
-  onLogin(user:string, password:string, tenantName:string, ip:string, port:string, isLiberty:boolean) {        
-    this._loginService.login(user, password, tenantName, ip, port, isLiberty);
+  initModel() {
+    this._model = new Login("admin", "password", "135.248.18.33", "5000", "admin", false);
   }
 
 }

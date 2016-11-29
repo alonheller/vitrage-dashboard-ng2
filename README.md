@@ -36,7 +36,9 @@ To get more help on the `angular-cli` use `ng --help` or go check out the [Angul
 * - V - Get vitrage API
 * - V - Refactor to ngModules: OpenstackLoginModule, VitrageAPIModule
 * - V - Add Routing after a success login
-* - Style Login page
+* - V - Style Login page
+* - Login page: Loading, button disable, handle errors, handle form validations
+* - Bootstrap and Fontawesome as part of the project, and not from CDN
 * - Add guard until valid token
 * - Add interceptor for 401, 403
 * - BDSM - https://github.com/500tech/bdsm
