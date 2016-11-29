@@ -4,20 +4,26 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { LoginService } from './login-service/login.service';
+import { AuthModule } from './auth/auth.module';
+import { VitrageApiModule } from './vitrage-api/vitrage-api.module';
+import { VitrageTopologyModule } from './vitrage-topology/vitrage-topology.module';
+
+import { LoginService } from './auth/login-service/login.service';
+import { DataService } from './vitrage-api/topology/data.service'
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent
+    AppComponent    
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    AuthModule,
+    VitrageApiModule,
+    VitrageTopologyModule
   ],
-  providers: [LoginService],
+  providers: [LoginService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

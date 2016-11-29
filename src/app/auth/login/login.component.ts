@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../login-service/login.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'auth-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
@@ -22,7 +22,4 @@ export class LoginComponent implements OnInit {
     this._loginService.login(user, password, tenantName, ip, port, isLiberty);
   }
 
-  onGetTopology() {
-    this._loginService.getTopology();
-  }
 }
