@@ -32,12 +32,16 @@ To get more help on the `angular-cli` use `ng --help` or go check out the [Angul
 
 
 ## TODO:
-1. Connect to openstack
-2. Get vitrage API
-3. BDSM - https://github.com/500tech/bdsm
-4. Refactor to ngModules: OpenstackLoginModule, VitrageAPIModule
-5. Add Material Design, Angular Bootstrap-2
-6. Add chart library: http://js.cytoscape.org/
+* - V - Connect to openstack
+* - V - Get vitrage API
+* - V - Refactor to ngModules: OpenstackLoginModule, VitrageAPIModule
+* - V - Add Routing after a success login
+* - Style Login page
+* - Add guard until valid token
+* - Add interceptor for 401, 403
+* - BDSM - https://github.com/500tech/bdsm
+* - Add Material Design, Angular Bootstrap-2
+* - Add chart library: http://js.cytoscape.org/
 
 ## CORS
 Add this line:

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import {Observable} from 'rxjs/Rx';
+import { Router } from '@angular/router';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -8,14 +9,11 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class LoginService {
-
-  private _http:Http;
+  
   private _vitrageUrl:string;
   private _token:string;
 
-  constructor(private http: Http) {
-    this._http = http;
-  }
+  constructor(private _http: Http, private _router:Router) { }
 
   login(user:string, password:string, tenantName:string, ip:string, port: string, isLiberty:boolean) {
     let url = `http://${ip}:${port}${!isLiberty ? '/identity' : ''}/v2.0/tokens`;
@@ -36,12 +34,10 @@ export class LoginService {
             this._vitrageUrl = element.endpoints[0].publicURL;            
           }
         });
-
-        return {token: this._token, vitrageUrl: this._vitrageUrl};
       
     })
-    .subscribe(
-      res => console.log('Success: ', res),
+    .subscribe(      
+      res => this._router.navigate(['/topology']),
       err => console.error(err));
   }
 
