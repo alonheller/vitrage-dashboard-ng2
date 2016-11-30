@@ -1,3 +1,30 @@
-.login-container {
+.login-container{
+    border: 2px solid #124191;
+    border-radius: 20px;
+    padding: 20px;
     background: #eee;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
 }
+
+.nokia-logo {
+    position: absolute;
+    right: -19px;
+    bottom: -26px;
+}
+
+.vitrage-logo {
+    display: block;
+    margin: auto;
+    padding-bottom: 15px;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+}
+
