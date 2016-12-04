@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { Router } from '@angular/router';
 import { Login } from './../../_models/login';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+
+import { AuthUser } from './../../_models/authUser';
 
 @Injectable()
 export class LoginService {
@@ -14,9 +15,9 @@ export class LoginService {
   private _vitrageUrl: string;
   private _token: string;
 
-  constructor(private _http: Http, private _router: Router) { }
+  constructor(private _http: Http) { }
 
-  login(login: Login) {
+  login(login: Login): Observable<AuthUser> {
     let url = `http://${login.openstackServerIp}:${login.port}${!login.isLiberty ? '/identity' : ''}/v2.0/tokens`;
     let body = { "auth": { "passwordCredentials": { "password": login.password, "username": login.username }, "tenantName": login.tenant } };
 
@@ -24,7 +25,7 @@ export class LoginService {
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
 
-    this._http.post(url, body, { headers: headers })
+    return this._http.post(url, body, { headers: headers })
       .map((res: any) => {
 
         let result = JSON.parse(res._body);
@@ -36,13 +37,16 @@ export class LoginService {
           }
         });
 
-        if (this._token) {          
+        if (this._token) {
           localStorage.setItem('vitrageToken', JSON.stringify(this._token));
         }
+
+        return new AuthUser(login.username, this._token, this._vitrageUrl);
       })
-      .subscribe(
-      res => this._router.navigate(['/topology']),
-      err => console.error(err));
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+    // .subscribe(
+    // res => this._router.navigate(['/topology']),
+    // err => console.error(err));
   }
 
   getVitrageUrl() {

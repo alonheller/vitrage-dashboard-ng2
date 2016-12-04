@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { LoginService } from '../login-service/login.service';
 import { Login } from './../../_models/login';
 
@@ -14,13 +14,23 @@ export class LoginComponent {
   private _model: Login;
   private _loading: boolean = false;
 
-  constructor(loginService: LoginService) {
+  constructor(loginService: LoginService,private _router: Router) {
     this._loginService = loginService;
     this.initModel();
   }
 
   login() {
-    this._loginService.login(this._model);
+    this._loading = true;
+    this._loginService.login(this._model)
+    .subscribe(
+      res => {
+        this._loading = false;
+        this._router.navigate(['/topology'])
+      },
+      err => {
+        this._loading = false;
+        console.error(err);
+    });
   }
 
   initModel() {

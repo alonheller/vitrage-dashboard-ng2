@@ -5,40 +5,40 @@
 <div class="vertical-center">
   <div class="col-md-4 col-md-offset-2 container login-container">
 
-    <div>    
-      <img class="vitrage-logo" src="/assets/vitrage-logo.png">      
+    <div>
+      <img class="vitrage-logo" src="/assets/vitrage-logo.png">
     </div>
 
     <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
 
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !_model.username.valid }">
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !_model.username }">
         <input type="text" class="form-control" placeholder="User" name="username" [(ngModel)]="_model.username" #username="ngModel"
           required />
-        <div *ngIf="f.submitted && !_model.username.valid" class="help-block">Username is required</div>
+        <div *ngIf="f.submitted && !_model.username" class="help-block">Username is required</div>
       </div>
 
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !_model.password.valid }">
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !_model.password }">
         <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="_model.password" #password="ngModel"
           required />
-        <div *ngIf="f.submitted && !_model.password.valid" class="help-block">Password is required</div>
+        <div *ngIf="f.submitted && !_model.password" class="help-block">Password is required</div>
       </div>
 
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !_model.openstackServerIp.valid }">
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !_model.openstackServerIp }">
         <input type="text" class="form-control" placeholder="Openstack Server IP" name="openstackServerIp" [(ngModel)]="_model.openstackServerIp"
           #openstackServerIp="ngModel" required />
-        <div *ngIf="f.submitted && !_model.openstackServerIp.valid" class="help-block">Openstack server IP is required</div>
+        <div *ngIf="f.submitted && !_model.openstackServerIp" class="help-block">Openstack server IP is required</div>
       </div>
 
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !_model.port.valid }">
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !_model.port }">
         <input type="text" class="form-control" placeholder="Port" name="port" [(ngModel)]="_model.port" #port="ngModel" required
         />
-        <div *ngIf="f.submitted && !_model.port.valid" class="help-block">Port is required</div>
+        <div *ngIf="f.submitted && !_model.port" class="help-block">Port is required</div>
       </div>
 
-      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !_model.tenant.valid }">
+      <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !_model.tenant }">
         <input type="text" class="form-control" placeholder="Tenant" name="tenant" [(ngModel)]="_model.tenant" #tenant="ngModel"
           required />
-        <div *ngIf="f.submitted && !_model.tenant.valid" class="help-block">Tenant is required</div>
+        <div *ngIf="f.submitted && !_model.tenant" class="help-block">Tenant is required</div>
       </div>
 
       <div class="checkbox">
@@ -48,8 +48,8 @@
       </div>
 
       <div class="form-group">
-        <button [disabled]="loading" class="btn btn-primary">Login</button>
-        <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+        <button [disabled]="_loading" class="btn btn-primary">Login</button>
+        <img *ngIf="_loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
         />
         <img class="nokia-logo" src="/assets/nokia_logo_blue.png">
       </div>
