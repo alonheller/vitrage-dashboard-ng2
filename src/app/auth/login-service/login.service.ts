@@ -44,9 +44,6 @@ export class LoginService {
         return new AuthUser(login.username, this._token, this._vitrageUrl);
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
-    // .subscribe(
-    // res => this._router.navigate(['/topology']),
-    // err => console.error(err));
   }
 
   getVitrageUrl() {
