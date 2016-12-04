@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import { Router } from '@angular/router';
-import { Login } from './../../models/login';
+import { Login } from './../../_models/login';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -36,6 +36,9 @@ export class LoginService {
           }
         });
 
+        if (this._token) {          
+          localStorage.setItem('vitrageToken', JSON.stringify(this._token));
+        }
       })
       .subscribe(
       res => this._router.navigate(['/topology']),

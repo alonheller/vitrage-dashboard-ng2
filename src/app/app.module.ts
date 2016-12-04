@@ -13,16 +13,17 @@ import { LoginService } from './auth/login-service/login.service';
 import { DataService } from './vitrage-api/topology/data.service'
 
 import { LoginComponent } from './auth/login/login.component';
-import {VitrageTopologyComponent } from './vitrage-topology/vitrage-topology.component';
+import { VitrageTopologyComponent } from './vitrage-topology/vitrage-topology.component';
+import { AuthGuard } from './_guards/auth-guard.guard';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'topology', component: VitrageTopologyComponent }
+  { path: 'topology', component: VitrageTopologyComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
   declarations: [
-    AppComponent    
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +34,7 @@ const appRoutes: Routes = [
     VitrageApiModule,
     VitrageTopologyModule
   ],
-  providers: [LoginService, DataService],
+  providers: [LoginService, DataService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
