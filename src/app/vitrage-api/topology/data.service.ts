@@ -31,7 +31,11 @@ export class DataService {
   }
 
   getTopology() {
-      let data = {"graph_type": "graph", "depth": null, "root": null, "all_tenants": 0, "query": null};
+      //let data = {"graph_type": "graph", "depth": null, "root": null, "all_tenants": 0, "query": null};
+
+      let data = {"graph_type": "tree", "depth": null, "root": null, "all_tenants": 0, "query": "{\"and\": [{\"==\": {\"category\": \"RESOURCE\"}}, {\"==\": {\"is_deleted\": false}}, { \"==\": {\"is_placeholder\": false}}, {\"or\": [{\"==\": {\"type\": \"openstack.cluster\"}}, {\"==\": {\"type\": \"nova.instance\"}}, {\"==\": {\"type\": \"nova.host\"}}, {\"==\": {\"type\": \"nova.zone\"}}]}]}"}
+
+
       this.post('/v1/topology', data)      
       .subscribe(
         res => console.log('Success: ', res),
