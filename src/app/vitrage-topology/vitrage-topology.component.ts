@@ -22,6 +22,10 @@ export class VitrageTopologyComponent implements OnInit {
     this._dataService.getTopology();
   }
 
+  onGetAlarms() {
+    this._dataService.getAlarms();    
+  }
+
   private drawD3() {
    d3.select("svg").append("line")          // attach a line
     .style("stroke", "black")  // colour the line
