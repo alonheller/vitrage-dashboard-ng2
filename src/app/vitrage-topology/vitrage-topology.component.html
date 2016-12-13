@@ -1,16 +1,16 @@
 <nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
   <div class="row">
-    <div class="col-md-4" style="background: green">
-      <a class="navbar-brand" href="#">
-        <img alt="Vitrage" src="assets/nokia_logo_blue.png">
+    <div class="col-md-2">
+      <a class="navbar-brand" href="#">        
+        <img alt="Vitrage" src="assets/nokia_logo_blue.png" class="img-thumbnail">
       </a>
     </div>
 
-    <div class="col-md-4" style="background: red">
+    <div class="col-md-4 offset-md-3">
       <h1 class="white">Vitrage</h1>
     </div>
 
-    <div class="col-md-4" style="background: green">      
+    <div class="col-md-3">      
       <span *ngIf="criticalAlarmsCounter > 0" class="tag tag-pill tag-danger pull-right px-1 mr-1">{{criticalAlarmsCounter}} Critical</span>      
       <span *ngIf="warningAlarmsCounter > 0" class="tag tag-pill tag-warning pull-right px-1 mr-1">{{warningAlarmsCounter}} Warnings</span>
       <span *ngIf="okAlarmsCounter > 0" class="tag tag-pill tag-success pull-right px-1 mr-1">{{okAlarmsCounter}} OK</span>
@@ -21,13 +21,6 @@
   </div>
 </nav>
 
-
-<!--<nav class="navbar navbar-inverse">
-  <button (click)="onGetTopology()" class="btn btn-info">Get Topology</button>
-  <button (click)="onGetAlarms()" class="btn btn-info">Get Alarms</button>
-</nav>
-
-<svg width="300" height="300"></svg>-->
 
 <ag-grid-ng2 #agGrid class="ag-dark" [gridOptions]="gridOptions">
 </ag-grid-ng2>

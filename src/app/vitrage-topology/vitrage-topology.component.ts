@@ -26,13 +26,13 @@ export class VitrageTopologyComponent implements OnInit {
     this.gridOptions = {
       enableColResize: true,
       enableSorting: true,
-      enableFilter: true,
-      enableStatusBar: true,
+      enableFilter: true,      
       columnDefs: [
         {
           headerName: "Time", field: "update_timestamp",
-          width: 150, pinned: true,
-          cellRenderer: this.timeCellRenderer
+          minWidth: 180, pinned: true,
+          cellRenderer: this.timeCellRenderer,
+          sort: 'desc', suppressSizeToFit: true
         },
         {
           headerName: "Name", field: "name",
@@ -40,7 +40,7 @@ export class VitrageTopologyComponent implements OnInit {
         },
         {
           headerName: "Resource Type", field: "resource_type",
-          width: 150, pinned: true
+          width: 150, pinned: true, suppressSizeToFit: true
         },
         {
           headerName: "Resource ID", field: "resource_id",
@@ -48,11 +48,25 @@ export class VitrageTopologyComponent implements OnInit {
         },
         {
           headerName: "Severity", field: "aggregated_severity",
-          width: 150, pinned: true
+          width: 150, pinned: true, suppressSizeToFit: true,
+          cellClassRules: {            
+            'red': function(params) { 
+              return (params.data.operational_severity == "CRITICAL" || params.data.operational_severity == "SEVERE")
+            },
+            'orange': function(params) { 
+              return params.data.operational_severity == "WARNING"
+            },
+            'gray': function(params) { 
+              return params.data.operational_severity == "N/A"
+            },
+            'green': function(params) { 
+              return params.data.operational_severity == "OK"
+            }
+          }
         },
         {
           headerName: "Type", field: "type",
-          width: 150, pinned: true
+          width: 150, pinned: true, suppressSizeToFit: true
         }
       ]
     };
@@ -117,6 +131,7 @@ export class VitrageTopologyComponent implements OnInit {
     }
 
     this.gridOptions.api.setRowData(rowData);
+    this.gridOptions.api.sizeColumnsToFit();
     this.showGrid = true;
   }
 
