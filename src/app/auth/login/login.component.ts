@@ -34,7 +34,8 @@ export class LoginComponent {
   }
 
   initModel() {
-    this._model = new Login("admin", "password", "135.248.18.33", "5000", "admin", false);
+    //this._model = new Login("admin", "password", "135.248.18.33", "5000", "admin", false);
+    this._model = new Login("admin", "password", "135.248.18.142", "5000", "admin", false);
   }
 
 }
