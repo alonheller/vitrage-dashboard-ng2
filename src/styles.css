@@ -1,5 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+head {
+    min-height: 100%;
+    min-width: 100%;
+}
+
 body {    
     background-color: #cccccc;
     padding-top: 70px;
+    min-height: 100%;
+    min-width: 100%;    
+    position: fixed;
+}
+
+app-root {
+    height: 100%;
+    width: 100%;
+    position: absolute;
 }

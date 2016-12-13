@@ -16,6 +16,9 @@ export class VitrageTopologyComponent implements OnInit {
   public rowData: any[];
   private columnDefs: any[];
   private totalAlarmsCounter: number;
+  private criticalAlarmsCounter: number;
+  private warningAlarmsCounter: number;
+  private minorAlarmsCounter: number;
 
   constructor(private _dataService: DataService) {
     this.gridOptions = {
@@ -37,7 +40,7 @@ export class VitrageTopologyComponent implements OnInit {
           width: 150, pinned: true
         },
         {
-          headerName: "Severity", field: "operational_severity",
+          headerName: "Severity", field: "aggregated_severity",
           width: 150, pinned: true
         },
         {
@@ -82,6 +85,9 @@ export class VitrageTopologyComponent implements OnInit {
 
   private createRowData(data: Array<any>) {
     var rowData: any[] = [];
+    this.criticalAlarmsCounter = 0;
+    this.warningAlarmsCounter = 0
+    this.minorAlarmsCounter = 0;
 
     for (var i = 0; i < data.length; i++) {
       rowData.push({
@@ -92,6 +98,19 @@ export class VitrageTopologyComponent implements OnInit {
         "severity": data[i].severity, "state": data[i].state, "type": data[i].type, "update_timestamp": data[i].update_timestamp,
         "vitrage_id": data[i].vitrage_id
       });
+
+      switch (data[i].aggregated_severity) {
+        case 'CRITICAL':
+        case 'HIGH':
+          this.criticalAlarmsCounter++;
+          break;
+        case 'WARNING':
+          this.warningAlarmsCounter++;
+          break;
+        case 'MINOR':
+          this.minorAlarmsCounter++;
+          break;
+      }
     }
 
     this.totalAlarmsCounter = data.length;

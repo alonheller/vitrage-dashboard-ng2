@@ -1,3 +1,12 @@
-.white {
-    color: white;
+img {
+    height: 52px;
+}
+
+ag-grid-ng2 {
+    width: 100%; 
+    height:100%;
+}
+
+h1 {
+    font-family: museo-slab,Georgia,"Times New Roman",Times,serif;
 }
