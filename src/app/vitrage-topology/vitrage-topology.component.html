@@ -7,13 +7,15 @@
     </div>
 
     <div class="col-md-4" style="background: red">
-      <h1 class="text-center">Vitrage</h1>
+      <h1 class="white">Vitrage</h1>
     </div>
 
-    <div class="col-md-4" style="background: green">
-      <span><i class="fa fa-spinner fa-spin fa-1x fa-fw white"></i></span>      
-      <span class="tag tag-pill tag-warning pull-right">{{warningAlarmsCounter}} Warnings</span>
-      <span class="tag tag-pill tag-danger pull-right">{{criticalAlarmsCounter}} Critical/High</span>
+    <div class="col-md-4" style="background: green">      
+      <span *ngIf="criticalAlarmsCounter > 0" class="tag tag-pill tag-danger pull-right px-1 mr-1">{{criticalAlarmsCounter}} Critical</span>      
+      <span *ngIf="warningAlarmsCounter > 0" class="tag tag-pill tag-warning pull-right px-1 mr-1">{{warningAlarmsCounter}} Warnings</span>
+      <span *ngIf="okAlarmsCounter > 0" class="tag tag-pill tag-success pull-right px-1 mr-1">{{okAlarmsCounter}} OK</span>
+      <span *ngIf="naAlarmsCounter > 0" class="tag tag-pill tag-default pull-right px-1 mr-1">{{naAlarmsCounter}} N/A</span>
+      <span *ngIf="isLoading" ><i class="fa fa-spinner fa-spin fa-1x fa-fw white pull-right mr-1"></i></span>      
     </div>
 
   </div>

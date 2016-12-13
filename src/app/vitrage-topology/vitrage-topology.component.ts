@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from './../vitrage-api/topology/data.service';
 import { GridOptions } from 'ag-grid/main';
 
-declare var d3;
+//declare var d3;
+declare var moment: any;
 
 @Component({
   selector: 'vitrage-topology',
@@ -15,17 +16,23 @@ export class VitrageTopologyComponent implements OnInit {
   private gridOptions: GridOptions;
   public rowData: any[];
   private columnDefs: any[];
-  private totalAlarmsCounter: number;
   private criticalAlarmsCounter: number;
   private warningAlarmsCounter: number;
-  private minorAlarmsCounter: number;
+  private naAlarmsCounter: number;
+  private okAlarmsCounter: number;
+  private isLoading: boolean;
 
   constructor(private _dataService: DataService) {
     this.gridOptions = {
+      enableColResize: true,
+      enableSorting: true,
+      enableFilter: true,
+      enableStatusBar: true,
       columnDefs: [
         {
           headerName: "Time", field: "update_timestamp",
-          width: 150, pinned: true
+          width: 150, pinned: true,
+          cellRenderer: this.timeCellRenderer
         },
         {
           headerName: "Name", field: "name",
@@ -47,47 +54,40 @@ export class VitrageTopologyComponent implements OnInit {
           headerName: "Type", field: "type",
           width: 150, pinned: true
         }
-
-
       ]
     };
   }
 
   ngOnInit() {
-    //this.drawD3();
-    //this.createRowData();
-    //this.showGrid = true;
+    this.getAlarms();
+  }
+
+  timeCellRenderer(params) {
+    return `<span>${moment(params.value).format('lll')}</span>`;
+  }
+
+  private getAlarms() {
+    this.isLoading = true;
 
     this._dataService.getAlarms()
       .subscribe(
       res => {
         this.createRowData(res.json());
+        this.isLoading = false;
       },
-      err => console.error(err));
-  }
+      err => {
+        console.error(err)
+        this.isLoading = true;
+      });
 
-  onGetTopology() {
-    this._dataService.getTopology();
-  }
-
-  onGetAlarms() {
-    this._dataService.getAlarms();
-  }
-
-  private drawD3() {
-    d3.select("svg").append("line")          // attach a line
-      .style("stroke", "black")  // colour the line
-      .attr("x1", 100)     // x position of the first end of the line
-      .attr("y1", 50)      // y position of the first end of the line
-      .attr("x2", 300)     // x position of the second end of the line
-      .attr("y2", 150);
   }
 
   private createRowData(data: Array<any>) {
     var rowData: any[] = [];
     this.criticalAlarmsCounter = 0;
     this.warningAlarmsCounter = 0
-    this.minorAlarmsCounter = 0;
+    this.naAlarmsCounter = 0;
+    this.okAlarmsCounter = 0;
 
     for (var i = 0; i < data.length; i++) {
       rowData.push({
@@ -99,22 +99,25 @@ export class VitrageTopologyComponent implements OnInit {
         "vitrage_id": data[i].vitrage_id
       });
 
-      switch (data[i].aggregated_severity) {
+      switch (data[i].operational_severity) {
         case 'CRITICAL':
-        case 'HIGH':
+        case 'SEVERE':
           this.criticalAlarmsCounter++;
           break;
         case 'WARNING':
           this.warningAlarmsCounter++;
           break;
-        case 'MINOR':
-          this.minorAlarmsCounter++;
+        case 'OK':
+          this.okAlarmsCounter++;
+          break;
+        case 'N/A':
+          this.naAlarmsCounter++;
           break;
       }
     }
 
-    this.totalAlarmsCounter = data.length;
     this.gridOptions.api.setRowData(rowData);
+    this.showGrid = true;
   }
 
 }

@@ -10,3 +10,7 @@ ag-grid-ng2 {
 h1 {
     font-family: museo-slab,Georgia,"Times New Roman",Times,serif;
 }
+
+.white {
+    color: white;
+}
