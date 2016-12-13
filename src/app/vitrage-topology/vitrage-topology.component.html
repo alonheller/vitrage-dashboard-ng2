@@ -1,9 +1,28 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-dark bg-inverse navbar-fixed-top">
+  <div class="row">
+    <div class="col-md-4">
+      <img alt="Vitrage" src="assets/nokia_logo_blue.png">
+    </div>
+
+    <div class="col-md-4">
+      <h1 class="white">Vitrage</h1>
+    </div>
+
+    <div class="col-md-4 vcenter">
+      <span><i class="fa fa-spinner fa-spin fa-1x fa-fw white"></i></span>
+      <span class="tag tag-pill tag-warning pull-right">{{totalAlarmsCounter}} Alarms</span>
+    </div>
+  </div>
+
+
+</nav>
+
+<!--<nav class="navbar navbar-inverse">
   <button (click)="onGetTopology()" class="btn btn-info">Get Topology</button>
   <button (click)="onGetAlarms()" class="btn btn-info">Get Alarms</button>
 </nav>
 
-<svg width="300" height="300"></svg>
+<svg width="300" height="300"></svg>-->
 
 <ag-grid-ng2 #agGrid style="width: 100%; height: 350px;" class="ag-dark" [gridOptions]="gridOptions">
 </ag-grid-ng2>

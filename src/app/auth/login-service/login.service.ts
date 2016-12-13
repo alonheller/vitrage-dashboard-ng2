@@ -15,7 +15,10 @@ export class LoginService {
   private _vitrageUrl: string;
   private _token: string;
 
-  constructor(private _http: Http) { }
+  constructor(private _http: Http) {
+    this._vitrageUrl = localStorage.getItem('vitrageUrl');
+    this._token = localStorage.getItem('vitrageToken');
+   }
 
   login(login: Login): Observable<AuthUser> {
     let url = `http://${login.openstackServerIp}:${login.port}${!login.isLiberty ? '/identity' : ''}/v2.0/tokens`;
@@ -34,11 +37,12 @@ export class LoginService {
         result.access.serviceCatalog.forEach(element => {
           if (element.name === 'vitrage') {
             this._vitrageUrl = element.endpoints[0].publicURL;
+            localStorage.setItem('vitrageUrl', this._vitrageUrl);
           }
         });
 
         if (this._token) {
-          localStorage.setItem('vitrageToken', JSON.stringify(this._token));
+          localStorage.setItem('vitrageToken', JSON.stringify(this._token).replace(/\"/g, ""));
         }
 
         return new AuthUser(login.username, this._token, this._vitrageUrl);
@@ -46,7 +50,7 @@ export class LoginService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
   }
 
-  getVitrageUrl() {
+  getVitrageUrl() {        
     return this._vitrageUrl;
   }
 

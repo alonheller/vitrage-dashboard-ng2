@@ -15,6 +15,7 @@ export class VitrageTopologyComponent implements OnInit {
   private gridOptions: GridOptions;
   public rowData: any[];
   private columnDefs: any[];
+  private totalAlarmsCounter: number;
 
   constructor(private _dataService: DataService) {
     this.gridOptions = {
@@ -79,7 +80,7 @@ export class VitrageTopologyComponent implements OnInit {
       .attr("y2", 150);
   }
 
-  private createRowData(data:Array<any>) {
+  private createRowData(data: Array<any>) {
     var rowData: any[] = [];
 
     for (var i = 0; i < data.length; i++) {
@@ -93,6 +94,7 @@ export class VitrageTopologyComponent implements OnInit {
       });
     }
 
+    this.totalAlarmsCounter = data.length;
     this.gridOptions.api.setRowData(rowData);
   }
 
