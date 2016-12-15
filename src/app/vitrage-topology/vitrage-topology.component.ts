@@ -26,7 +26,7 @@ export class VitrageTopologyComponent implements OnInit {
     this.gridOptions = {
       enableColResize: true,
       enableSorting: true,
-      enableFilter: true,      
+      enableFilter: true,
       columnDefs: [
         {
           headerName: "Time", field: "update_timestamp",
@@ -49,17 +49,17 @@ export class VitrageTopologyComponent implements OnInit {
         {
           headerName: "Severity", field: "aggregated_severity",
           width: 150, pinned: true, suppressSizeToFit: true,
-          cellClassRules: {            
-            'red': function(params) { 
+          cellClassRules: {
+            'red': function (params) {
               return (params.data.operational_severity == "CRITICAL" || params.data.operational_severity == "SEVERE")
             },
-            'orange': function(params) { 
+            'orange': function (params) {
               return params.data.operational_severity == "WARNING"
             },
-            'gray': function(params) { 
+            'gray': function (params) {
               return params.data.operational_severity == "N/A"
             },
-            'green': function(params) { 
+            'green': function (params) {
               return params.data.operational_severity == "OK"
             }
           }
